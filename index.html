@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selbstlernkurs Mathematik - 9. Klasse</title>
+    
+    <!-- KaTeX für perfekte mathematische Formeldarstellung -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Z1eZIxQ81SLyWl66r9hWFQ6vo4jMWmxQSyo31yvXmW7CAh2L9FX1xxzzERm_wPHIIsmsnUyXcKgsDiBYjs3St_hOAF8ePM1zJDuvhcC18hDGoZz5QGN_wbv6KvPjqqtj-FKDtjyfHgyKOK-aB_dflwEzwQvWPshBHfYQ-yuIvRosNBLLj4EqHOJ8Z-qBwu7coPvcL9J6OlB907zmqRkL9QeYbHiw5qfPeqCMqFt0iAwqOCsOE3TvPyFuHgzNhlEDQwsKz5XXKd00-HeYzshQGwt-5_v8XMGcaaHotJEQSU6LcMPOXucmLhxFugeluX0y" charset="UTF-8"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent-bg: #eff6ff;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary-color: #3b82f6;
+            --primary-hover: #60a5fa;
+            --accent-bg: #1e3a8a;
+            --border-color: #334155;
+            --code-bg: #0f172a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Layout mit mitfahrendem Inhaltsverzeichnis */
+        .layout-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Mitfahrende Sidebar */
+        nav.toc {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        nav.toc h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        nav.toc ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        nav.toc li {
+            margin-bottom: 0.6rem;
+        }
+
+        nav.toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        nav.toc a:hover {
+            color: var(--primary-color);
+            background-color: var(--accent-bg);
+        }
+
+        main.content {
+            min-width: 0; /* Verhindert Overflows in Grid */
+        }
+
+        section.topic {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .pdf-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-bg);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .pdf-link-btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        h2 {
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-top: 1.8rem;
+            font-size: 1.25rem;
+        }
+
+        .box {
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Akkordeon für Lösungen */
+        details {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--primary-color);
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "▼";
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-content {
+            padding: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--code-bg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design für Mobilgeräte */
+        @media (max-width: 900px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav.toc {
+                position: static;
+                max-height: none;
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+    <h1>Selbstlernkurs Mathematik - 9. Klasse</h1>
+    <p>Ausführlicher Kurs zu Reellen Zahlen & Quadratischen Funktionen</p>
+</header>
+
+<div class="layout-container">
+
+    <!-- Mitfahrendes Inhaltsverzeichnis (Sticky Sidebar) -->
+    <nav class="toc">
+        <h2>Inhaltsverzeichnis</h2>
+        <ul>
+            <li><a href="#thema1">1. Quadratwurzeln</a></li>
+            <li><a href="#thema2">2. Reelle Zahlen & Zahlenmengen</a></li>
+            <li><a href="#thema3">3. Der Heron-Algorithmus</a></li>
+            <li><a href="#thema4">4. Rechnen mit Quadratwurzeln</a></li>
+            <li><a href="#thema5">5. Termumformungen</a></li>
+            <li><a href="#thema6">6. Quadratische Funktionen</a></li>
+            <li><a href="#thema7">7. Verschiebung von Parabeln</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hauptinhalt -->
+    <main class="content">
+
+        <!-- THEMA 1 -->
+        <section id="thema1" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=17" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 6 & 17 öffnen</a>
+            <h2>1. Quadratwurzeln</h2>
+
+            <p>Der Flächeninhalt eines Quadrats wird berechnet, indem man seine Seitenlänge quadriert. Hat ein Quadrat beispielsweise die Seitenlänge $a = 5	ext{ cm}$, so berechnet sich der Flächeninhalt über:</p>
+            <p>$$A = a^2 = (5	ext{ cm})^2 = 25	ext{ cm}^2$$</p>
+            <p>In der Praxis tritt häufig die umgekehrte Fragestellung auf: Aus einem vorgegebenen Flächeninhalt $A$ soll die zugehörige Seitenlänge $a$ eines Quadrats ermittelt werden. Man sucht also diejenige nicht-negative Zahl, deren Quadrat gleich dem Flächeninhalt ist.</p>
+
+            <div class="box">
+                <h3>Definition: Quadratwurzel & Radikand</h3>
+                <p>Die <strong>Quadratwurzel</strong> (kurz: <em>Wurzel</em>) einer nicht-negativen reellen Zahl $a$ ($a \ge 0$) ist diejenige nicht-negative Zahl, die quadriert wieder $a$ ergibt. Man schreibt:</p>
+                <p>$$\sqrt{a}$$</p>
+                <p>Die Zahl $a$ unter dem Wurzelzeichen wird als <strong>Radikand</strong> bezeichnet (abgeleitet vom lateinischen Begriff <em>radix</em> für Wurzel).</p>
+            </div>
+
+            <h3>Wichtige Eigenschaften und Rechenregeln für den Einstieg</h3>
+            <ul>
+                <li><strong>Umkehrungsprinzip:</strong> Für jede Zahl $a \ge 0$ gilt $(\sqrt{a})^2 = a$ sowie $\sqrt{a^2} = a$. Das Quadrieren stellt folglich die Umkehrung des Wurzelziehens (Radizierens) dar (z. B. $(\sqrt{3})^2 = 3$ oder $\sqrt{5^2} = 5$).</li>
+                <li><strong>Quadrat negativer Ausdrücke:</strong> Da das Quadrat jeder Zahl stets positiv ist, gilt beispielsweise $\sqrt{(-3)^2} = \sqrt{9} = 3$. Das Ergebnis einer Quadratwurzel ist per Definition niemals negativ.</li>
+                <li><strong>Einschränkung des Definitionsbereichs:</strong> Aus einer negativen Zahl kann in den reellen Zahlen keine Wurzel gezogen werden (z. B. ist $\sqrt{-9}$ nicht definiert), da keine reelle Zahl quadriert ein negatives Ergebnis liefert.</li>
+            </ul>
+
+            <h3>Lösungen einfacher quadratischer Gleichungen</h3>
+            <p>Suchst du nach allen Zahlen $x$, die quadriert einen bestimmten Wert $a$ ($a > 0$) ergeben, betrachtest du die quadratische Gleichung $x^2 = a$. Diese besitzt genau zwei Lösungen:</p>
+            <ol>
+                <li>Eine positive Lösung: $x_1 = \sqrt{a}$</li>
+                <li>Eine negative Lösung: $x_2 = -\sqrt{a}$</li>
+            </ol>
+            <p><em>Beispiel:</em> Die Gleichung $x^2 = 49$ führt zu den beiden Lösungen $x_1 = \sqrt{49} = 7$ und $x_2 = -\sqrt{49} = -7$, da sowohl $7^2 = 49$ als auch $(-7)^2 = 49$ ist. Eine Gleichung wie $x^2 = -16$ hat hingegen keine Lösung ($L = \{\}$).</p>
+
+            <details>
+                <summary>💡 Beispielaufgaben & Klick-Lösungen zu Thema 1 anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>Beispiel 1: Bestimme die Werte der Quadratwurzeln ohne Taschenrechner.</strong></p>
+                    <ul>
+                        <li>a) $\sqrt{81}$</li>
+                        <li>b) $\sqrt{1,44}$</li>
+                        <li>c) $\sqrt{rac{4}{9}}$</li>
+                        <li>d) $-\sqrt{6,25}$</li>
+                    </ul>
+                    <details>
+                        <summary>Lösung zu Beispiel 1 anzeigen</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li>a) $\sqrt{81} = 9$, da $9^2 = 81$.</li>
+                                <li>b) $\sqrt{1,44} = 1,2$, da $1,2^2 = 1,44$.</li>
+                                <li>c) $\sqrt{rac{4}{9}} = rac{2}{3}$, da $(rac{2}{3})^2 = rac{4}{9}$.</li>
+                                <li>d) $-\sqrt{6,25} = -2,5$, da $2,5^2 = 6,25$ und das Minuszeichen vor der Wurzel steht.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <p style="margin-top: 1.5rem;"><strong>Beispiel 2: Bestimme $\sqrt{2,25}$ und löse die Gleichung $x^2 = 2,25$.</strong></p>
+                    <details>
+                        <summary>Lösung zu Beispiel 2 anzeigen</summary>
+                        <div class="details-content">
+                            <p>Die Quadratwurzel ist eindeutig nicht-negativ: $\sqrt{2,25} = 1,5$.</p>
+                            <p>Die quadratische Gleichung $x^2 = 2,25$ hat hingegen zwei Lösungen: $x_1 = 1,5$ und $x_2 = -1,5$.</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 2 -->
+        <section id="thema2" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=1" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 1 & 2 öffnen</a>
+            <h2>2. Reelle Zahlen & Einordnung in Zahlenmengen</h2>
+
+            <p>Gibt man $\sqrt{2}$ in den Taschenrechner ein, zeigt das Display (bei 10 Stellen) den Wert $1,414213562$ an. Rechnet man jedoch nach, ergibt das Quadrat dieses Wertes:</p>
+            <p>$$1,414213562^2 = 1,999999998944727844 
+e 2$$</p>
+            <p>Taschenrechner geben beim Wurzelziehen aus Zahlen, die keine Quadratzahlen sind, prinzipbedingt nur gerundete Näherungswerte aus. Dennoch lässt sich zeigen, dass $\sqrt{2}$ exakt einem Punkt auf der Zahlengeraden entspricht.</p>
+
+            <h3>Geometrische Konstruktion von $\sqrt{2}$ auf der Zahlengeraden</h3>
+            <p>Werden zwei Quadrate mit dem Flächeninhalt $A = 1$ entlang ihrer Diagonalen zerschnitten und zu einem neuen großen Quadrat zusammengesetzt, besitzt dieses den Flächeninhalt $A = 2$. Eine Seitenlänge dieses neuen Quadrats beträgt somit $\sqrt{2}$ (da $(\sqrt{2})^2 = 2$). Da diese Seitenlänge mit der Diagonale des Einheitsquadrats identisch ist, kann man diese Länge mithilfe eines Zirkels exakt auf die Zahlengerade abtragen.</p>
+
+            <h3>Eingrenzung durch Intervallschachtelung</h3>
+            <p>Um den Wert von $\sqrt{2}$ schrittweise einzuschränken, nutzt man Dezimalbrüche und prüft deren Quadrate:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Schritt / Intervall</th>
+                        <th>Mathematische Begründung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$1 < \sqrt{2} < 2$</td>
+                        <td>$1^2 = 1 < 2 < 4 = 2^2$</td>
+                    </tr>
+                    <tr>
+                        <td>$1,4 < \sqrt{2} < 1,5$</td>
+                        <td>$1,4^2 = 1,96 < 2 < 2,25 = 1,5^2$</td>
+                    </tr>
+                    <tr>
+                        <td>$1,41 < \sqrt{2} < 1,42$</td>
+                        <td>$1,41^2 = 1,9881 < 2 < 2,0164 = 1,42^2$</td>
+                    </tr>
+                    <tr>
+                        <td>$1,414 < \sqrt{2} < 1,415$</td>
+                        <td>$1,414^2 = 1,999396 < 2 < 2,002225 = 1,415^2$</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Wiederholt man dieses Verfahren unendlich oft, werden die Intervalllängen beliebig klein. Eine solche unendliche Folge von verschachtelten Intervallen nennt man <strong>Intervallschachtelung</strong>.</p>
+
+            <div class="box">
+                <h3>Beweis durch Widerspruch: $\sqrt{2}$ ist keine rationale Zahl</h3>
+                <p><strong>Behauptung:</strong> $\sqrt{2}$ ist keine rationale Zahl.</p>
+                <p><strong>Beweisansatz (Annahme des Gegenteils):</strong> Wir nehmen an, $\sqrt{2}$ sei doch eine rationale Zahl. Dann lässt sich $\sqrt{2}$ als vollständig gekürzter Bruch darstellen:</p>
+                <p>$$\sqrt{2} = rac{p}{q} \quad 	ext{mit } p, q \in \mathbb{N}, 	ext{ wobei } p 	ext{ und } q 	ext{ teilerfremd sind.}$$</p>
+                <p>Da $\sqrt{2}$ keine ganze Zahl ist, muss für den Nenner $q 
+e 1$ gelten. Quadriert man beide Seiten der Gleichung, erhält man:</p>
+                <p>$$2 = \left(rac{p}{q}ight)^2 = rac{p^2}{q^2}$$</p>
+                <p>Da $p$ und $q$ teilerfremd sind, besitzen auch $p^2$ und $q^2$ keine gemeinsamen Teiler. Weil $q 
+e 1$ ist, ist auch $q^2 
+e 1$. Somit ist der Bruch $rac{p^2}{q^2}$ keine natürliche Zahl und kann niemals exakt gleich der ganzen Zahl $2$ sein.</p>
+                <p><strong>Widerspruch!</strong> Aus der gegenteiligen Annahme folgt ein unmöglicher mathematischer Widerspruch. Daher muss die Annahme falsch sein: <strong>$\sqrt{2}$ ist keine rationale Zahl.</strong> (Dieser Beweis stammt bereits von Euklid, ca. 300 v. Chr.).</p>
+            </div>
+
+            <h3>Zahlenmengen im Überblick</h3>
+            <div class="box">
+                <ul>
+                    <li><strong>$\mathbb{N}$ (Natürliche Zahlen):</strong> $\{1, 2, 3, 4, ...\}$ (in vielen Lehrplänen; mit Null schreibt man $\mathbb{N}_0 = \{0, 1, 2, 3, ...\}$)</li>
+                    <li><strong>$\mathbb{Z}$ (Ganze Zahlen):</strong> $\{..., -3, -2, -1, 0, 1, 2, 3, ...\}$</li>
+                    <li><strong>$\mathbb{Q}$ (Rationale Zahlen):</strong> Alle Zahlen, die sich als Bruch $rac{p}{q}$ ($p, q \in \mathbb{Z}, q 
+e 0$) darstellen lassen (endlich oder unendlich periodische Dezimalbrüche).</li>
+                    <li><strong>$\mathbb{R} \setminus \mathbb{Q}$ (Irrationale Zahlen):</strong> Nicht als Bruch darstellbare Zahlen (unendliche, nicht-periodische Dezimalbrüche wie $\sqrt{2}, \sqrt{10}, \pi$).</li>
+                    <li><strong>$\mathbb{R}$ (Reelle Zahlen):</strong> Die Gesamtheit aller rationalen und irrationalen Zahlen.</li>
+                </ul>
+                <p>Teilmengenbeziehung: $$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$</p>
+            </div>
+
+            <!-- AUFGABEN ZUR ZAHLENEINORDNUNG -->
+            <details>
+                <summary>💡 Übungsaufgaben: Einordnung von Zahlen in Zahlenmengen (Klick-Lösungen)</summary>
+                <div class="details-content">
+                    <p><strong>Aufgabe:</strong> Ordne die folgenden Zahlen der kleinstmöglichen Zahlenmenge ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}$ oder $\mathbb{R} \setminus \mathbb{Q}$) zu und gib an, zu welchen der Gesamtmengen ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$) sie gehören:</p>
+                    <p style="font-size: 1.1rem; text-align: center;">$$7; \quad -5; \quad rac{3}{4}; \quad 0,275; \quad 5,111...; \quad \sqrt{16}; \quad \sqrt{2}; \quad \pi; \quad -0,25; \quad \sqrt{2,5}$$</p>
+
+                    <details>
+                        <summary>Lösung zur Einordnung anzeigen</summary>
+                        <div class="details-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Zahl</th>
+                                        <th>Vereinfachte Form</th>
+                                        <th>Kleinstmögliche Menge</th>
+                                        <th>Enthalten in den Mengen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$7$</td>
+                                        <td>$7$</td>
+                                        <td>$\mathbb{N}$ (Natürliche Zahl)</td>
+                                        <td>$\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$-5$</td>
+                                        <td>$-5$</td>
+                                        <td>$\mathbb{Z}$ (Ganze Zahl)</td>
+                                        <td>$\mathbb{Z}, \mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$rac{3}{4}$</td>
+                                        <td>$0,75$</td>
+                                        <td>$\mathbb{Q}$ (Rationale Zahl)</td>
+                                        <td>$\mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$0,275$</td>
+                                        <td>$rac{11}{40}$</td>
+                                        <td>$\mathbb{Q}$ (Rationale Zahl)</td>
+                                        <td>$\mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$5,111...$</td>
+                                        <td>$5,ar{1} = 5rac{1}{9}$</td>
+                                        <td>$\mathbb{Q}$ (Periodische Zahl)</td>
+                                        <td>$\mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\sqrt{16}$</td>
+                                        <td>$4$</td>
+                                        <td>$\mathbb{N}$ (Natürliche Zahl)</td>
+                                        <td>$\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\sqrt{2}$</td>
+                                        <td>$1,41421356...$</td>
+                                        <td>$\mathbb{R} \setminus \mathbb{Q}$ (Irrational)</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\pi$</td>
+                                        <td>$3,14159265...$</td>
+                                        <td>$\mathbb{R} \setminus \mathbb{Q}$ (Irrational)</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$-0,25$</td>
+                                        <td>$-rac{1}{4}$</td>
+                                        <td>$\mathbb{Q}$ (Rationale Zahl)</td>
+                                        <td>$\mathbb{Q}, \mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\sqrt{2,5}$</td>
+                                        <td>$1,5811388...$</td>
+                                        <td>$\mathbb{R} \setminus \mathbb{Q}$ (Irrational)</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 3 -->
+        <section id="thema3" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=3" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 3 & 4 öffnen</a>
+            <h2>3. Der Heron-Algorithmus</h2>
+
+            <p>Ein <strong>Iterationsverfahren</strong> ist ein schrittweises Rechenverfahren, bei dem ein mathematischer Rechenschritt immer wiederholt wird, um sich einem exakten Ergebnis anzunähern. Der <strong>Heron-Algorithmus</strong> ist ein klassisches Iterationsverfahren zur Berechnung von Näherungswerten für $\sqrt{a}$ ($a > 0$).</p>
+
+            <h3>Geometrische Grundidee am Beispiel $\sqrt{12}$</h3>
+            <p>Man wählt ein Startrechteck mit dem Flächeninhalt $a = 12$. Dieses Rechteck wandelt man schrittweise in flächeninhaltsgleiche Rechtecke um. Die Seitenlängen werden in jedem Schritt so angepasst, dass das Rechteck immer mehr zu einem Quadrat wird. Da das Produkt der Seitenlängen $x_n \cdot y_n = 12$ bleibt, stellen die Seitenlängen immer genauer werdende Näherungswerte für $\sqrt{12}$ dar.</p>
+
+            <div class="box">
+                <h3>Allgemeines Verfahren & Rekursionsformel</h3>
+                <p>1. Wähle einen beliebigen Startwert $x_1 > 0$. Berechne die zweite Seitenlänge $y_1 = rac{a}{x_1}$.</p>
+                <p>2. Die neue Seitenlänge $x_{n+1}$ im nächsten Schritt ist jeweils der arithmetische Mittelwert der beiden bisherigen Seitenlängen $x_n$ und $y_n$:</p>
+                <p>$$x_{n+1} = rac{1}{2} \cdot \left(x_n + rac{a}{x_n}ight), \quad y_{n+1} = rac{a}{x_{n+1}}$$</p>
+            </div>
+
+            <h3>Beispielrechnung für $\sqrt{12}$ (Startwert $x_1 = 6$)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Schritt $n$</th>
+                        <th>Seitenlänge $x_n$</th>
+                        <th>Seitenlänge $y_n = rac{12}{x_n}$</th>
+                        <th>Abweichung $|x_n - y_n|$</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 (Start)</td>
+                        <td>$x_1 = 6$</td>
+                        <td>$y_1 = rac{12}{6} = 2$</td>
+                        <td>$|6 - 2| = 4$</td>
+                    </tr>
+                    <tr>
+                        <td>2 (1. Iteration)</td>
+                        <td>$x_2 = rac{1}{2}(6 + 2) = 4$</td>
+                        <td>$y_2 = rac{12}{4} = 3$</td>
+                        <td>$|4 - 3| = 1$</td>
+                    </tr>
+                    <tr>
+                        <td>3 (2. Iteration)</td>
+                        <td>$x_3 = rac{1}{2}(4 + 3) = 3,5$</td>
+                        <td>$y_3 = rac{12}{3,5} pprox 3,428571$</td>
+                        <td>$|3,5 - 3,428571| pprox 0,0714$</td>
+                    </tr>
+                    <tr>
+                        <td>4 (3. Iteration)</td>
+                        <td>$x_4 = rac{1}{2}(3,5 + 3,428571) pprox 3,464286$</td>
+                        <td>$y_4 pprox 3,463918$</td>
+                        <td>$0,000368$</td>
+                    </tr>
+                    <tr>
+                        <td>5 (4. Iteration)</td>
+                        <td>$x_5 pprox 3,46410162$</td>
+                        <td>$y_5 pprox 3,46410161$</td>
+                        <td>$0,00000001$</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Güte der Näherung:</strong> Die Anzahl der Nachkommastellen, in denen $x_n$ und $y_n$ übereinstimmen, entspricht der exakten Stellenanzahl von $\sqrt{a}$. Bereits nach wenigen Schritten steht fest, dass die Dezimalbruchentwicklung von $\sqrt{12}$ mit $3,46$ beginnt.</p>
+
+            <details>
+                <summary>💡 Beispielaufgabe & Klick-Lösung zum Heron-Algorithmus anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>Aufgabe:</strong> Mit dem Heron-Algorithmus soll $\sqrt{5}$ angenähert werden. Als Startwert wird $x_1 = 1$ gewählt. Bestimme die Näherungswerte $x_2$, $x_3$ und $x_4$ (d. h. nach dem 1., 2. und 3. Iterationsschritt).</p>
+                    <details>
+                        <summary>Lösung Schritt für Schritt anzeigen</summary>
+                        <div class="details-content">
+                            <p><strong>Startwert ($x_1$):</strong> $x_1 = 1 \implies y_1 = rac{5}{1} = 5$.</p>
+                            <p><strong>1. Iterationsschritt ($x_2$):</strong> $x_2 = rac{1}{2}(1 + 5) = 3 \implies y_2 = rac{5}{3} pprox 1,667$.</p>
+                            <p><strong>2. Iterationsschritt ($x_3$):</strong> $x_3 = rac{1}{2}\left(3 + rac{5}{3}ight) = rac{1}{2} \cdot rac{14}{3} = rac{7}{3} pprox 2,333 \implies y_3 = rac{5}{rac{7}{3}} = rac{15}{7} pprox 2,143$.</p>
+                            <p><strong>3. Iterationsschritt ($x_4$):</strong> $x_4 = rac{1}{2}\left(rac{7}{3} + rac{15}{7}ight) = rac{1}{2} \cdot rac{94}{21} = rac{47}{21} pprox 2,238$.</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 4 -->
+        <section id="thema4" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=5" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 5 & 6 öffnen</a>
+            <h2>4. Rechnen mit Quadratwurzeln</h2>
+
+            <div class="box">
+                <h3>Grundlegende Rechenregeln für Quadratwurzeln</h3>
+                <ul>
+                    <li><strong>Multiplikationsregel:</strong> Für $a \ge 0, b \ge 0$ gilt: $$\sqrt{a} \cdot \sqrt{b} = \sqrt{a \cdot b}$$</li>
+                    <li><strong>Divisionsregel:</strong> Für $a \ge 0, b > 0$ gilt: $$\sqrt{a} : \sqrt{b} = \sqrt{a : b} \quad 	ext{bzw.} \quad rac{\sqrt{a}}{\sqrt{b}} = \sqrt{rac{a}{b}}$$</li>
+                    <li><strong>WICHTIG (Keine Summenregel!):</strong> Wurzeln dürfen bei Addition/Subtraktion <strong>nicht</strong> zusammengezogen werden!
+                    $$\sqrt{a} + \sqrt{b} 
+e \sqrt{a + b}$$
+                    <em>Gegenbeispiel:</em> $\sqrt{16} + \sqrt{9} = 4 + 3 = 7$, aber $\sqrt{16 + 9} = \sqrt{25} = 5$. Da $7 
+e 5$, gilt die Regel nicht.</li>
+                </ul>
+            </div>
+
+            <h3>Addition und Subtraktion von Wurzeltermen</h3>
+            <p>Mithilfe des Distributivgesetzes können Wurzelterme nur dann zusammengefasst werden, wenn sie den **gleichen Radikanden** aufweisen:</p>
+            <p>$$2\sqrt{5} + 4\sqrt{5} = (2 + 4)\sqrt{5} = 6\sqrt{5}$$</p>
+            <p>$$\sqrt{7} + 2\sqrt{5} - 3\sqrt{7} + 4\sqrt{5} = (2 + 4)\sqrt{5} + (1 - 3)\sqrt{7} = 6\sqrt{5} - 2\sqrt{7}$$</p>
+
+            <h3>Teilweises Wurzelziehen (Teilweises Radizieren)</h3>
+            <p>Lässt sich ein Radikand so in ein Produkt zerlegen, dass mindestens ein Faktor eine Quadratzahl ist, kann aus diesem Faktor die Wurzel gezogen werden:</p>
+            <p>$$\sqrt{75} = \sqrt{25 \cdot 3} = \sqrt{25} \cdot \sqrt{3} = 5\sqrt{3}$$</p>
+            <p>$$\sqrt{12} + \sqrt{27} = \sqrt{4 \cdot 3} + \sqrt{9 \cdot 3} = 2\sqrt{3} + 3\sqrt{3} = 5\sqrt{3}$$</p>
+
+            <h3>Quadrieren und Wurzelziehen bei Variablen: Der Betrag</h3>
+            <p>Da Wurzeln nur aus nicht-negativen Werten gezogen werden dürfen und das Ergebnis nie negativ ist, gilt für beliebige reelle Zahlen $a$:</p>
+            <div class="box">
+                <p>$$\sqrt{a^2} = |a|$$</p>
+                <p><em>Beispiele:</em> $\sqrt{3^2} = |3| = 3$, aber auch $\sqrt{(-3)^2} = |-3| = 3$.</p>
+            </div>
+
+            <details>
+                <summary>💡 Beispielaufgaben & Klick-Lösungen zu Thema 4 anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>Vereinfache die Terme ohne Taschenrechner:</strong></p>
+                    <ol>
+                        <li>$\sqrt{3} \cdot \sqrt{12}$</li>
+                        <li>$rac{\sqrt{80}}{\sqrt{5}}$</li>
+                        <li>$\sqrt{45} - 2\sqrt{5}$</li>
+                        <li>$\sqrt{32} + \sqrt{18}$</li>
+                        <li>$\sqrt{(c+s)^2}$</li>
+                        <li>$\sqrt{25x^2y^2}$</li>
+                    </ol>
+                    <details>
+                        <summary>Lösungen zu den Aufgaben anzeigen</summary>
+                        <div class="details-content">
+                            <ol>
+                                <li>$\sqrt{3} \cdot \sqrt{12} = \sqrt{3 \cdot 12} = \sqrt{36} = 6$</li>
+                                <li>$rac{\sqrt{80}}{\sqrt{5}} = \sqrt{rac{80}{5}} = \sqrt{16} = 4$</li>
+                                <li>$\sqrt{45} - 2\sqrt{5} = \sqrt{9 \cdot 5} - 2\sqrt{5} = 3\sqrt{5} - 2\sqrt{5} = \sqrt{5}$</li>
+                                <li>$\sqrt{32} + \sqrt{18} = \sqrt{16 \cdot 2} + \sqrt{9 \cdot 2} = 4\sqrt{2} + 3\sqrt{2} = 7\sqrt{2}$</li>
+                                <li>$\sqrt{(c+s)^2} = |c+s|$</li>
+                                <li>$\sqrt{25x^2y^2} = \sqrt{(5xy)^2} = 5|xy|$</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 5 -->
+        <section id="thema5" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=7" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 7 & 8 öffnen</a>
+            <h2>5. Termumformungen</h2>
+
+            <h3>Rationalmachen des Nenners</h3>
+            <p>Bruchterme mit einer Wurzel im Nenner lassen sich oft schwer einschätzen oder weiterverarbeiten. Man formt sie durch Erweiterung so um, dass im Nenner keine Wurzel mehr auftritt.</p>
+
+            <div class="box">
+                <h4>Fall 1: Einzelne Wurzel im Nenner</h4>
+                <p>Man erweitert den gesamten Bruch mit genau der Wurzel, die im Nenner steht:</p>
+                <p>$$rac{1}{\sqrt{2}} = rac{1 \cdot \sqrt{2}}{\sqrt{2} \cdot \sqrt{2}} = rac{\sqrt{2}}{2}$$</p>
+                <p>$$rac{1 - \sqrt{2}}{3\sqrt{2}} = rac{(1 - \sqrt{2})\cdot \sqrt{2}}{3\sqrt{2} \cdot \sqrt{2}} = rac{\sqrt{2} - 2}{3 \cdot 2} = rac{\sqrt{2} - 2}{6}$$</p>
+
+                <h4>Fall 2: Summe oder Differenz mit Wurzeln im Nenner</h4>
+                <p>Steht im Nenner eine Summe oder Differenz (z. B. $\sqrt{a} + \sqrt{b}$), erweitert man mithilfe der <strong>3. binomischen Formel</strong> ($(x+y)(x-y) = x^2 - y^2$):</p>
+                <p>$$rac{3}{\sqrt{7} + \sqrt{5}} = rac{3 \cdot (\sqrt{7} - \sqrt{5})}{(\sqrt{7} + \sqrt{5})(\sqrt{7} - \sqrt{5})} = rac{3(\sqrt{7} - \sqrt{5})}{(\sqrt{7})^2 - (\sqrt{5})^2} = rac{3(\sqrt{7} - \sqrt{5})}{7 - 5} = rac{3(\sqrt{7} - \sqrt{5})}{2}$$</p>
+            </div>
+
+            <h3>Binomische Formeln zum Wurzelziehen aus Summen</h3>
+            <p>Steht unter einer Wurzel eine Summe oder Differenz, darf man nicht einzeln die Wurzel ziehen. Man kann den Term jedoch mithilfe der 1. oder 2. binomischen Formel rückwärts in ein Produkt (ein Quadrat) umwandeln:</p>
+
+            <div class="box">
+                <p>$$\sqrt{x^2 + 2xy + y^2} = \sqrt{(x+y)^2} = |x+y|$$</p>
+                <p>$$\sqrt{x^2 - 6x + 9} = \sqrt{(x-3)^2} = |x-3|$$</p>
+            </div>
+
+            <details>
+                <summary>💡 Beispielaufgaben & Klick-Lösungen zu Thema 5 anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>1. Mache den Nenner rational:</strong></p>
+                    <ul>
+                        <li>a) $rac{7}{\sqrt{5}}$</li>
+                        <li>b) $rac{2}{\sqrt{7} - \sqrt{5}}$</li>
+                    </ul>
+                    <p><strong>2. Ziehe die Wurzel mithilfe binomischer Formeln:</strong></p>
+                    <ul>
+                        <li>a) $\sqrt{a^2 + 8a + 16}$</li>
+                        <li>b) $\sqrt{1 - 6b + 9b^2}$</li>
+                    </ul>
+
+                    <details>
+                        <summary>Lösungen anzeigen</summary>
+                        <div class="details-content">
+                            <p><strong>1a)</strong> $rac{7}{\sqrt{5}} = rac{7\cdot \sqrt{5}}{\sqrt{5}\cdot \sqrt{5}} = rac{7\sqrt{5}}{5}$</p>
+                            <p><strong>1b)</strong> $rac{2}{\sqrt{7} - \sqrt{5}} = rac{2(\sqrt{7} + \sqrt{5})}{(\sqrt{7}-\sqrt{5})(\sqrt{7}+\sqrt{5})} = rac{2(\sqrt{7}+\sqrt{5})}{7-5} = rac{2(\sqrt{7}+\sqrt{5})}{2} = \sqrt{7} + \sqrt{5}$</p>
+                            <p><strong>2a)</strong> Prüfe doppeltes Produkt: $2 \cdot a \cdot 4 = 8a$. Daher: $\sqrt{a^2+8a+16} = \sqrt{(a+4)^2} = |a+4|$</p>
+                            <p><strong>2b)</strong> $\sqrt{1 - 6b + 9b^2} = \sqrt{(1 - 3b)^2} = |1 - 3b|$</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 6 -->
+        <section id="thema6" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=9" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 9, 10 & 11 öffnen</a>
+            <h2>6. Erkennen quadratischer Funktionen und Gleichungen</h2>
+
+            <div class="box">
+                <h3>Definition: Quadratische Funktion</h3>
+                <p>Eine Funktion $f$ mit einer Zuordnungsvorschrift der Form</p>
+                <p>$$f(x) = ax^2 + bx + c \quad (a, b, c \in \mathbb{R}, a 
+e 0)$$</p>
+                <p>heißt <strong>quadratische Funktion</strong> (in allgemeiner Form). Die reellen Zahlen $a, b$ und $c$ werden als <strong>Koeffizienten</strong> bezeichnet. Der Funktionsgraph einer quadratischen Funktion ist eine <strong>Parabel</strong>.</p>
+            </div>
+
+            <h3>Eigenschaften von Parabeln & Scheitelpunkt</h3>
+            <ul>
+                <li><strong>Parabelöffnung:</strong> Ist $a > 0$, ist die Parabel nach <strong>oben geöffnet</strong>. Ist $a < 0$, ist sie nach <strong>unten geöffnet</strong>.</li>
+                <li><strong>Scheitelpunkt (Scheitel $S$):</strong> Der tiefste Punkt einer nach oben geöffneten Parabel bzw. der höchste Punkt einer nach unten geöffneten Parabel heißt Scheitelpunkt der Parabel.</li>
+            </ul>
+
+            <h3>Die Normalparabel $f(x) = x^2$</h3>
+            <p>Die einfachste quadratische Funktion hat den Term $f(x) = x^2$ (mit $a=1, b=0, c=0$). Ihr Graph heißt <strong>Normalparabel</strong>.</p>
+            <ul>
+                <li><strong>Definitions- und Wertemenge:</strong> $D = \mathbb{R}$, $W = [0; +\infty[$</li>
+                <li><strong>Symmetrie:</strong> Achsensymmetrisch zur $y$-Achse, da $f(-x) = (-x)^2 = x^2 = f(x)$.</li>
+                <li><strong>Scheitelpunkt:</strong> Der Scheitelpunkt liegt exakt im Koordinatenursprung $S(0|0)$.</li>
+            </ul>
+
+            <h3>Quadratische Gleichungen & Grafische Lösung</h3>
+            <p>Gleichungen, die sich auf die Form $ax^2 + bx + c = 0$ bringen lassen, heißen quadratische Gleichungen.</p>
+            <ul>
+                <li><strong>Grafische Lösung über Nullstellen:</strong> Die Lösungen der Gleichung $ax^2 + bx + c = 0$ entsprechen den Schnittpunkten des Graphen von $f(x) = ax^2 + bx + c$ mit der $x$-Achse (Nullstellen).</li>
+                <li><strong>Grafische Lösung über Schnittpunkte:</strong> Formen wie $0,5x^2 - 1,5x - 3 = x - 0,5$ löst man grafisch, indem man die Schnittpunkte der Parabel $f(x) = 0,5x^2 - 1,5x - 3$ und der Geraden $g(x) = x - 0,5$ abliest. Die $x$-Koordinaten der Schnittpunkte sind die Lösungen.</li>
+            </ul>
+
+            <details>
+                <summary>💡 Beispielaufgabe & Klick-Lösung zu Thema 6 anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>Aufgabe:</strong> Bringe die Funktion $g(x) = -x + 5 - 2x^2 + 2x - 5$ in die allgemeine Form $f(x) = ax^2 + bx + c$ und gib die Koeffizienten $a, b, c$ an.</p>
+                    <details>
+                        <summary>Lösung anzeigen</summary>
+                        <div class="details-content">
+                            <p>Sortieren und Zusammenfassen der Glieder:</p>
+                            <p>$g(x) = -2x^2 + (-x + 2x) + (5 - 5) = -2x^2 + 1x + 0$</p>
+                            <p><strong>Koeffizienten:</strong> $a = -2$, $b = 1$, $c = 0$.</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+        <!-- THEMA 7 -->
+        <section id="thema7" class="topic">
+            <a href="Seiten_als_Bilder.pdf#page=12" target="_blank" class="pdf-link-btn">📄 PDF-Quelle: Seite 12, 13, 14 & 15 öffnen</a>
+            <h2>7. Verschiebung der Normalparabel entlang der Achsen</h2>
+
+            <div class="box">
+                <h3>1. Verschiebung in $y$-Richtung: $f(x) = x^2 + e$</h3>
+                <p>Der Graph der Funktion $f(x) = x^2 + e$ ist eine entlang der $y$-Achse verschobene Normalparabel.</p>
+                <ul>
+                    <li>Für $e > 0$: Verschiebung um $e$ Einheiten nach <strong>oben</strong>.</li>
+                    <li>Für $e < 0$: Verschiebung um $|e|$ Einheiten nach <strong>unten</strong>.</li>
+                    <li><strong>Scheitelpunkt:</strong> $S(0|e)$</li>
+                </ul>
+                <h4>Rechnerische Ermittlung der Nullstellen ($x^2 + e = 0 \implies x^2 = -e$):</h4>
+                <ul>
+                    <li><strong>$e > 0$:</strong> Keine Lösung, da $x^2 = -e$ negativ wäre (keine Nullstellen).</li>
+                    <li><strong>$e = 0$:</strong> Genau eine Lösung $x = 0$ (Scheitelpunkt berührt $x$-Achse).</li>
+                    <li><strong>$e < 0$:</strong> Zwei Lösungen $x_1 = -\sqrt{-e}$ und $x_2 = \sqrt{-e}$.</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>2. Verschiebung in $x$-Richtung: $f(x) = (x + d)^2$</h3>
+                <p>Der Graph der Funktion $f(x) = (x + d)^2$ ist eine entlang der $x$-Achse verschobene Normalparabel.</p>
+                <ul>
+                    <li>Für $d > 0$: Verschiebung um $d$ Einheiten nach <strong>links</strong> (z. B. $(x+2)^2 \implies S(-2|0)$).</li>
+                    <li>Für $d < 0$: Verschiebung um $|d|$ Einheiten nach <strong>rechts</strong> (z. B. $(x-1)^2 \implies S(1|0)$).</li>
+                    <li><strong>Scheitelpunkt:</strong> $S(-d|0)$</li>
+                    <li><strong>Nullstelle:</strong> Genau eine Nullstelle bei $x = -d$.</li>
+                </ul>
+            </div>
+
+            <h3>Erkennen der Verschiebung mithilfe Binomischer Formeln</h3>
+            <p>Liegt ein Funktionsterm in allgemeiner Form vor (z. B. $g(x) = x^2 - 4x + 4$), prüft man durch Anwenden der binomischen Formeln rückwärts, ob eine reine Verschiebung in $x$-Richtung vorliegt:</p>
+            <p>$$g(x) = x^2 - 4x + 4 = x^2 - 2\cdot x \cdot 2 + 2^2 = (x - 2)^2$$</p>
+            <p>Der Graph von $g$ ist somit eine um $2$ Einheiten nach rechts verschobene Normalparabel mit dem Scheitelpunkt $S(2|0)$.</p>
+
+            <details>
+                <summary>💡 Beispielaufgaben & Klick-Lösungen zu Thema 7 anzeigen</summary>
+                <div class="details-content">
+                    <p><strong>Aufgabe 1:</strong> Gib die Scheitelpunkte und Funktionsterme für folgende Beschreibungen an:</p>
+                    <ul>
+                        <li>a) Die Normalparabel wird um 3,5 Einheiten nach unten verschoben.</li>
+                        <li>b) Die Normalparabel wird um 4,5 Einheiten nach links verschoben.</li>
+                    </ul>
+                    <p><strong>Aufgabe 2:</strong> Bestimme den Scheitelpunkt der Parabel $g(x) = x^2 - 8x + 16$.</p>
+
+                    <details>
+                        <summary>Lösungen anzeigen</summary>
+                        <div class="details-content">
+                            <p><strong>1a)</strong> $f(x) = x^2 - 3,5 \implies S(0|-3,5)$</p>
+                            <p><strong>1b)</strong> $f(x) = (x + 4,5)^2 \implies S(-4,5|0)$</p>
+                            <p><strong>2)</strong> Umformung: $g(x) = x^2 - 2 \cdot x \cdot 4 + 4^2 = (x - 4)^2$.<br>Der Scheitelpunkt lautet $S(4|0)$.</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    <p>Interaktiver Selbstlernkurs Mathematik | 9. Klasse | Vollständige Lehrplaninhalte</p>
+</footer>
+
+<script>
+    // Script für Theme-Toggle (Light / Dark Mode)
+    const toggleBtn = document.getElementById('themeToggle');
+    
+    // Prüfen, ob bereits eine Einstellung im Speicher liegt
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggleBtn.textContent = '☀️ Light Mode';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            toggleBtn.textContent = '🌙 Dark Mode';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            toggleBtn.textContent = '☀️ Light Mode';
+        }
+    });
+</script>
+
+</body>
+</html>
